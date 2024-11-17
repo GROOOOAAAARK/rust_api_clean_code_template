@@ -1,31 +1,21 @@
 [package]
 name = "rust-clean-code-template"
 version = "0.1.0"
-authors = ["GROARK <grk_010@protonmail.com>"]
-edition = "2018"
+authors = ["GROARK"]
+edition = "2021"
+
+# [workspace]
+# members = ["src/adapters", "src/domain", "src/infrastructure", "src/use_cases", "src/main.rs"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [[bin]]
-name = "rust_api"
+name = "rust_clean_code_api"
 path = "src/main.rs"
 
 [dependencies]
-infrastructure = "0.0.0"
-rocket = "0.5.0-rc.1"
+actix-web = "4.9.0"
+chrono = "0.4.31"
+serde_json = "1.0.108"
 strum = "0.24"
 strum_macros = "0.24"
-
-[workspace]
-members = [
-    "src/adapters",
-    "src/domain",
-    "src/infrastructure",
-    "src/use_cases",
-]
-
-[patch.crates-io]
-adapters = { path = "src/adapters" }
-domain = { path = "src/domain" }
-infrastructure = { path = "src/infrastructure" }
-use_cases = { path = "src/use_cases" }
