@@ -6,7 +6,7 @@ use crate::infrastructure::ping_api;
 
 fn module_routes() -> Vec<fn> {
     const routes: Vec<fn> = Vec::new();
-    routes.extend(ping_api::get_routers());
+    routes.extend(ping_api::get_router());
 }
 
 pub fn get_app() -> App {
