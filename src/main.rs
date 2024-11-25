@@ -1,17 +1,11 @@
 extern crate actix_web;
 
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use std::io::Result;
 
-use crate::infrastructure::api;
+use rust_clean_code_api::run_server;
 
 #[actix_web::main]
 async fn main() -> Result<()> {
-    const app = api::get_app();
-    HttpServer::new(|| {
-        app
-    })
-    .bind(("127.0.0.1", 8080))?
-    .run()
+    run_server()?
     .await
 }
