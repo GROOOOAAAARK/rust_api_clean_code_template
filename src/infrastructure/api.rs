@@ -1,19 +1,9 @@
 extern crate actix_web;
 
-use actix_web::{App, HttpServer}
+use actix_web::web;
 
-use crate::infrastructure::ping_api;
+use crate::infrastructure::ping_apis;
 
-fn module_routes() -> Vec<fn> {
-    const routes: Vec<fn> = Vec::new();
-    routes.extend(ping_api::get_router());
+pub fn routes(service_config: &mut web::ServiceConfig) {
+    service_config.service(web::scope("/ping").configure(ping_apis::routes));
 }
-
-pub fn get_app() -> App {
-    const app = App::new();
-    for route in module_routes() {
-        app.service(route);
-    }
-    app
-}
-
