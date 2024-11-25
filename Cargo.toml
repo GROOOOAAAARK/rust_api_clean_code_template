@@ -1,5 +1,5 @@
 [package]
-name = "rust-clean-code-template"
+name = "rust_clean_code_api"
 version = "0.1.0"
 authors = ["GROARK"]
 edition = "2021"
