@@ -44,5 +44,12 @@ impl CertifiedInformation {
             signature,
         }
     }
+
+    pub fn to_json(&self) -> Map<String, Value> {
+        let mut json: Map<String, Value> = Map::new();
+        json.insert("issuance".to_string(), Value::String(self.issuance.to_rfc3339_opts(chrono::SecondsFormat::AutoSi, true)));
+        json.insert("data".to_string(), serde_json::to_value(&self.data.clone()).unwrap());
+        json.insert("signature".to_string(), Value::String(self.signature.clone()));
+        json
     }
 }
