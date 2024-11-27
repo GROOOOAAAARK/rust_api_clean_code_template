@@ -2,17 +2,17 @@ extern crate chrono;
 extern crate serde_json;
 extern crate strum_macros;
 
-use std::collections::HashMap;
+use serde_json::{Map, Value};
 use chrono::{DateTime, Utc};
 
-pub struct CertifiedInformation<'a> {
+pub struct CertifiedInformation {
     issuance: DateTime<Utc>,
-    data: HashMap<&'a str, &'a str>,
-    signature: &'a str,
+    data: Map<String, Value>,
+    signature: String,
 }
 
-impl<'a> CertifiedInformation<'a> {
-    pub fn new(issuance: DateTime<Utc>, data: HashMap<&'a str, &'a str>, signature: &'a str) -> CertifiedInformation<'a> {
+impl CertifiedInformation {
+    pub fn new(issuance: DateTime<Utc>, data: Map<String, Value>, signature: String) -> CertifiedInformation {
         CertifiedInformation{
             issuance,
             data,
@@ -24,11 +24,12 @@ impl<'a> CertifiedInformation<'a> {
         self.issuance
     }
 
-    pub fn get_data(&self) -> HashMap<&str, &str> {
+    pub fn get_data(&self) -> Map<String, Value> {
         self.data.clone()
     }
 
-    pub fn get_signature(&self) -> &str {
-        self.signature
+    pub fn get_signature(&self) -> String {
+        self.signature.clone()
+    }
     }
 }
