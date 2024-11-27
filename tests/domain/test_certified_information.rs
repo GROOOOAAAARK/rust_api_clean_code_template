@@ -36,4 +36,18 @@ fn test_from_json() {
     assert_eq!(cert_info.get_data(), expected_data);
     assert_eq!(cert_info.get_signature().clone(), SIGNATURE);
 }
+
+#[test]
+fn test_to_json() {
+    let issuance = Utc.ymd(2023, 1, 1).and_hms(0, 0, 0);
+    let mut data = Map::new();
+    data.insert("key".to_string(), Value::String("value".to_string()));
+    let signature = "test_signature".to_string();
+
+    let cert_info = CertifiedInformation::new(issuance, data.clone(), signature.clone());
+    let json = cert_info.to_json();
+
+    assert_eq!(json.get("issuance").unwrap().clone(), Value::String("2023-01-01T00:00:00Z".to_string()));
+    assert_eq!(json.get("data").unwrap().clone(), serde_json::to_value(data.clone()).unwrap());
+    assert_eq!(json.get("signature").unwrap().clone(), Value::String("test_signature".to_string()));
 }
