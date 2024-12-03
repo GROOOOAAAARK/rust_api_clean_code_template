@@ -37,7 +37,7 @@ impl CertifiedInformation {
         let issuance: DateTime<Utc> = DateTime::parse_from_rfc3339(issuance_str).unwrap().with_timezone(&Utc);
         let data_str: &str = json.get("data").unwrap().as_str().unwrap();
         let data: Map<String, Value> = serde_json::from_str(data_str).unwrap();
-        let signature: String = json.get("signature").unwrap().to_string();
+        let signature: String = json.get("signature").unwrap().as_str().unwrap().to_string();
         CertifiedInformation{
             issuance,
             data,
