@@ -7,7 +7,7 @@ use std::option::Option;
 use crate::usecases::ports::traits::{Opt};
 
 
-#[derive(strum_macros::Display, Clone)]
+#[derive(strum_macros::Display, Clone, Debug, PartialEq)]
 pub enum ResponseStatus {
     Ok,
     Created,
@@ -33,7 +33,7 @@ impl Opt<ResponseStatus> for Option<ResponseStatus> {
     }
 }
 
-#[derive(strum_macros::Display, Clone)]
+#[derive(strum_macros::Display, Clone, Debug, PartialEq)]
 pub enum ResponseMessage {
     Pong,
     TeaPot,
