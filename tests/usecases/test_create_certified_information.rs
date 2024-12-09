@@ -22,3 +22,13 @@ fn test_create_right_input() {
     assert_eq!(result.data().unwrap().get("data").unwrap(), &serde_json::to_value(data).unwrap());
     assert_eq!(result.data().unwrap().get("signature").unwrap(), "test_signature");
 }
+
+#[test]
+fn test_create_wrong_issuance_date_format() {
+    let usecase = CreateCertifiedInformationUsecase {};
+    let input: CreateCertifiedInformationInput = CreateCertifiedInformationInput::new("202382-0212341".to_string(), "".to_string(), "test_signature".to_string());
+    let result: Response = usecase.execute(input);
+    assert_eq!(result.success(), false);
+    assert_eq!(result.status(), ResponseStatus::BadRequest);
+    assert_eq!(result.message().unwrap(), ResponseMessage::InvalidIssuanceDateFormat);
+}
