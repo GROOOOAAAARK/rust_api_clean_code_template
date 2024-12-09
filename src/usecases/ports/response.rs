@@ -50,53 +50,53 @@ impl Opt<ResponseMessage> for Option<ResponseMessage> {
 }
 
 pub struct Response {
-    success: bool,
-    status: ResponseStatus,
-    message: Option<ResponseMessage>,
-    data: Option<Map<String, Value>>
+    _success: bool,
+    _status: ResponseStatus,
+    _message: Option<ResponseMessage>,
+    _data: Option<Map<String, Value>>
 }
 
 impl Response {
     pub fn new(success: bool, status: ResponseStatus, message: Option<ResponseMessage>, data: Option<Map<String, Value>>) -> Response{
         Response{
-            success,
-            status,
-            message,
-            data
+            _success: success,
+            _status: status,
+            _message: message,
+            _data: data
         }
     }
 
     pub fn succeeded(status: Option<ResponseStatus>, message: Option<ResponseMessage>, data: Option<Map<String, Value>>) -> Response{
         Response{
-            success: true,
-            status: status.unwrap_or(ResponseStatus::Ok),
-            message: message,
-            data: data,
+            _success: true,
+            _status: status.unwrap_or(ResponseStatus::Ok),
+            _message: message,
+            _data: data,
         }
     }
 
     pub fn failed(status: Option<ResponseStatus>, message: Option<ResponseMessage>, data: Option<Map<String, Value>>) -> Response{
         Response{
-            success: false,
-            status: status.unwrap_or(ResponseStatus::DontUseTeapotForCoffeePot),
-            message,
-            data,
+            _success: false,
+            _status: status.unwrap_or(ResponseStatus::DontUseTeapotForCoffeePot),
+            _message: message,
+            _data: data,
         }
     }
 
     pub fn success(&self) -> bool {
-        self.success
+        self._success
     }
 
     pub fn status(&self) -> ResponseStatus {
-        self.status.clone()
+        self._status.clone()
     }
 
     pub fn message(&self) -> Option<ResponseMessage> {
-        self.message.clone()
+        self._message.clone()
     }
 
     pub fn data(&self) -> Option<Map<String, Value>> {
-        self.data.clone()
+        self._data.clone()
     }
 }
