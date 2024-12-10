@@ -1,6 +1,6 @@
+extern crate chrono;
 extern crate serde;
 extern crate serde_json;
-extern crate chrono;
 
 use chrono::{DateTime, Utc, ParseResult, FixedOffset};
 use serde::{Serialize, Deserialize};
@@ -45,10 +45,16 @@ impl UsecaseTrait<CreateCertifiedInformationInput> for CreateCertifiedInformatio
             return Response::failed(Some(ResponseStatus::BadRequest), Some(ResponseMessage::InvalidIssuanceDateFormat), None);
         }
 
+        let data = serde_json::from_str(&_input.data);
+
+        if data.is_err() {
+            println!("Error parsing json data: {:?}", data.err().unwrap());
+            return Response::failed(Some(ResponseStatus::BadRequest), Some(ResponseMessage::InvalidDataFormat), None)
+        }
 
         let certified_information: CertifiedInformation = CertifiedInformation::new(
             issuance_date.unwrap().with_timezone(&Utc),
-            serde_json::from_str(&_input.data).unwrap(),
+            data.unwrap(),
             _input.signature,
         );
 
