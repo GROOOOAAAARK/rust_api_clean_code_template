@@ -1,7 +1,7 @@
-use chrono::{TimeZone, Utc, DateTime};
 use serde_json::{Map, Value};
 use rust_clean_code_api::usecases::create_certified_information::{CreateCertifiedInformationUsecase, CreateCertifiedInformationInput};
 use rust_clean_code_api::usecases::ports::response::{Response, ResponseStatus, ResponseMessage};
+use rust_clean_code_api::usecases::ports::traits::UsecaseTrait;
 
 #[test]
 fn test_create_right_input() {
