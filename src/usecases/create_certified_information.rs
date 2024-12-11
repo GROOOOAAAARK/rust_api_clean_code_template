@@ -1,8 +1,11 @@
 extern crate chrono;
+extern crate mockall;
 extern crate serde;
 extern crate serde_json;
 
 use chrono::{DateTime, Utc, ParseResult, FixedOffset};
+use mockall::*;
+use mockall::predicate::*;
 use serde::{Serialize, Deserialize};
 
 use crate::domain::certified_information::CertifiedInformation;
@@ -34,6 +37,7 @@ impl CreateCertifiedInformationUsecase {
     }
 }
 
+#[automock]
 impl UsecaseTrait<CreateCertifiedInformationInput> for CreateCertifiedInformationUsecase {
     fn execute(&self, input: CreateCertifiedInformationInput) -> Response {
         let _input: CreateCertifiedInformationInput = input;

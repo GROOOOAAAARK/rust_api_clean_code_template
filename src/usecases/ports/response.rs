@@ -39,6 +39,7 @@ pub enum ResponseMessage {
     TeaPot,
     CertifiedInformationCreated,
     InvalidIssuanceDateFormat,
+    InvalidDataFormat,
 }
 
 impl Opt<ResponseMessage> for Option<ResponseMessage> {
