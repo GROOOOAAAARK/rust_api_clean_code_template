@@ -2,8 +2,6 @@ use chrono::{TimeZone, Utc, DateTime};
 use serde_json::{Map, Value};
 use rust_clean_code_api::domain::certified_information::CertifiedInformation;
 
-use super::*;
-
 #[test]
 fn test_new_and_getters() {
     let issuance: DateTime<Utc> = Utc.ymd(2023, 1, 1).and_hms(0, 0, 0);
