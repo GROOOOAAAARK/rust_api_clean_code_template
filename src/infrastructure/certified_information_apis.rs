@@ -14,7 +14,7 @@ pub fn routes(service_config: &mut ServiceConfig) {
 
 // ** Routes **
 
-#[post("/certified-information")]
+#[post("")]
 async fn create_certified_information(
     request: Json<CreateCertifiedInformationInput>
 ) -> HttpResponse {
