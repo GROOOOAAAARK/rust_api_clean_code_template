@@ -2,7 +2,7 @@ use crate::infrastructure::api;
 
 use actix_web::{App, HttpServer, dev::Server};
 
-pub fn server() -> Result<Server, std::io::Error> {
+pub fn run() -> Result<Server, std::io::Error> {
     const port: u16 = 8080;//TODO: move to env var
 
     let server: Server = HttpServer::new(move || App::new()

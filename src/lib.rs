@@ -6,5 +6,5 @@ pub mod usecases;
 use actix_web::dev::Server;
 
 pub fn run_server() -> Result<Server, std::io::Error> {
-    infrastructure::server()
+    infrastructure::http_server::run()
 }
