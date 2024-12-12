@@ -3,8 +3,8 @@ extern crate actix_web;
 use actix_web::HttpResponse;
 use actix_web::http::StatusCode;
 
-use rust_clean_code_api::adapters::create_certified_information_controller::{CreateCertifiedInformationController};
-use rust_clean_code_api::adapters::http_presenter::{HttpPresenter};
+use rust_clean_code_api::adapters::create_certified_information_controller::CreateCertifiedInformationController;
+use rust_clean_code_api::adapters::http_presenter::HttpPresenter;
 use rust_clean_code_api::adapters::ports::traits::AdapterTrait;
 use rust_clean_code_api::usecases::create_certified_information::{MockCreateCertifiedInformationUsecase, CreateCertifiedInformationInput};
 use rust_clean_code_api::usecases::ports::response::{Response, ResponseStatus, ResponseMessage};
