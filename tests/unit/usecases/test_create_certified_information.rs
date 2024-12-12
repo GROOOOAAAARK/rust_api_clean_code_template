@@ -10,7 +10,7 @@ fn test_create_right_input() {
     data.insert("key".to_string(), Value::String("value".to_string()));
     let input: CreateCertifiedInformationInput = CreateCertifiedInformationInput::new(
         "2023-01-01T00:00:00Z".to_string(),
-        serde_json::to_string(&data).unwrap(),
+        data.clone(),
         "test_signature".to_string(),
     );
     let result: Response = usecase.execute(input);
@@ -26,19 +26,9 @@ fn test_create_right_input() {
 #[test]
 fn test_create_wrong_issuance_date_format() {
     let usecase = CreateCertifiedInformationUsecase {};
-    let input: CreateCertifiedInformationInput = CreateCertifiedInformationInput::new("202382-0212341".to_string(), "".to_string(), "test_signature".to_string());
+    let input: CreateCertifiedInformationInput = CreateCertifiedInformationInput::new("202382-0212341".to_string(), serde_json::from_str(&r#"{"test_data": "test_data"}"#).unwrap(), "test_signature".to_string());
     let result: Response = usecase.execute(input);
     assert_eq!(result.success(), false);
     assert_eq!(result.status(), ResponseStatus::BadRequest);
     assert_eq!(result.message().unwrap(), ResponseMessage::InvalidIssuanceDateFormat);
-}
-
-#[test]
-fn test_create_wrong_data_format() {
-    let usecase = CreateCertifiedInformationUsecase {};
-    let input: CreateCertifiedInformationInput = CreateCertifiedInformationInput::new("2023-01-01T00:00:00Z".to_string(), "".to_string(), "test_signature".to_string());
-    let result: Response = usecase.execute(input);
-    assert_eq!(result.success(), false);
-    assert_eq!(result.status(), ResponseStatus::BadRequest);
-    assert_eq!(result.message().unwrap(), ResponseMessage::InvalidDataFormat);
 }
